@@ -1,20 +1,26 @@
-export interface JSXProps  {
-  children?:JSXElement|JSXElement[]
+export interface JSXProps
+{
+  children?: JSXElement | JSXElement[]
 }
 
 export type JSXElement<Props extends JSXProps = JSXProps> = {
-  type:string,
-  props:Props
+  type: string,
+  props: Props
 };
 
-export type JSXFactory<T extends JSXProps = JSXProps> = (props?:JSXProps) => JSXElement<JSXProps>; 
+export type JSXFactory<T extends JSXProps = JSXProps> = (props?: JSXProps) => JSXElement<JSXProps>;
 
-function jsx<T extends JSXProps>(type:JSXFactory<T>, config:T) {
-  if (typeof type === "function") {
+/**
+ * This is where you want to inject your own Types
+ */
+function jsx<T extends JSXProps>(type: JSXFactory<T>, config: T)
+{
+  if (typeof type === "function")
+  {
     return type(config);
   }
-  
-const { children = [], ...props } = config;
+
+  const { children = [], ...props } = config;
   const childrenProps = [].concat(children);
   return {
     type,
@@ -27,7 +33,8 @@ const { children = [], ...props } = config;
   };
 }
 
-function createTextElement(text) {
+function createTextElement(text)
+{
   return {
     type: "TEXT_ELEMENT",
     props: {
@@ -37,7 +44,11 @@ function createTextElement(text) {
   };
 }
 
-function render(element, container) {
+/**
+ * This turns the jsx into actual Dom Elements.
+ */
+function render(element, container)
+{
   const dom =
     element.type === "TEXT_ELEMENT"
       ? container.ownerDocument.createTextNode("")
@@ -45,7 +56,8 @@ function render(element, container) {
   const isProperty = (key) => key !== "children";
   Object.keys(element.props)
     .filter(isProperty)
-    .forEach((name) => {
+    .forEach((name) =>
+    {
       dom[name] = element.props[name];
     });
   element.props.children.forEach((child) => render(child, dom));

@@ -5,9 +5,7 @@
   "main": "index.js",
   "scripts": {
     "serve": "webpack-dev-server --mode=development --config webpack.config.js",
-    "build-web": "webpack --mode=production --config webpack.config.js",
-    "build": "babel src -d lib --extensions '.ts,.tsx,.js,.jsx'",
-    "start": "node -r esm lib"
+    "build": "webpack --mode=production --config webpack.config.js"
   },
   "keywords": [],
   "author": "",
@@ -15,9 +13,7 @@
   "dependencies": {
     "@babel/cli": "^7.16.0",
     "@babel/core": "^7.16.5",
-    "@babel/plugin-transform-react-jsx": "^7.16.5",
-    "esm": "^3.2.25",
-    "jsdom": "^19.0.0"
+    "@babel/plugin-transform-react-jsx": "^7.16.5"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.16.5",
