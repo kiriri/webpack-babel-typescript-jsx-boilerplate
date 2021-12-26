@@ -1,0 +1,13 @@
+{
+  // TODO : Why does tsx not get loaded?
+  "presets": ["@babel/preset-env", "@babel/preset-typescript"],
+  "plugins": [
+    [
+      "@babel/plugin-transform-react-jsx",
+      {
+        "runtime": "automatic",
+        "importSource": "../runtime",
+      }
+    ]
+  ]
+}
